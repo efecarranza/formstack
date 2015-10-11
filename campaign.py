@@ -32,7 +32,7 @@ class Campaign(object):
         politicians = []
         democrat = Politician('Hilary', 'Clinton', 'Democrat')
         politicians.append(democrat)
-        republican = Politician('Donald', 'Trump', 'Republican')
+        republican = Politician('Jeb', 'Bush', 'Republican')
         politicians.append(republican)
         return politicians
 
