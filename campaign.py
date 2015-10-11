@@ -51,7 +51,10 @@ class Campaign(object):
         voter = Voter(first_name, last_name, views)
         response = self.submit_vote(first_name, last_name, views)
         if response == 200:
-            self.voters.append(voter)
+            print 'Submitting your survey. Please wait...'
+            self.submissions_list = self.client.get_submissions_list()
+            self.voters = self.generate_voter_instances(self.submissions_list)
+            print 'Survey was submitted successfully'
         else:
             print 'There was an error submitting your survey, please try again later.'
         return
@@ -96,11 +99,11 @@ class Campaign(object):
         print 'Based on our estimations derived from this survey, the 2016 Election would go to:'
         if votes_democrat > votes_republican:
             print bcolors.OKBLUE
-            print self.politicians[0].list_politician()
+            self.politicians[0].list_politician()
             print bcolors.ENDC
         elif votes_republican > votes_democrat:
             print bcolors.FAIL
-            print self.politicians[1].list_politician()
+            self.politicians[1].list_politician()
             print bcolors.ENDC
         else:
             print 'It is impossible for us to derive a potential winner based on the amount of surveys collected at this time.'
